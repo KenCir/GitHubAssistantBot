@@ -5,7 +5,7 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-FROM node:20-slim AS runner
+FROM node:20-slim
 WORKDIR /usr/src/app
 COPY package.json package-lock.json ./
 RUN npm ci --production
