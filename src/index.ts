@@ -10,6 +10,10 @@ const inactiveDuplicateLabel = "Status: Inactive(Duplicate)";
 const inactiveAbandonedLabel = "Status: Inactive(Abandoned)";
 
 export default (app: Probot) => {
+  app.onError(async (error) => {
+    app.log.error(error);
+  });
+
   app.on("issues.opened", async (context) => {
     if (!context.payload.issue.assignee) {
       context.octokit.issues.addLabels(context.issue({ labels: [todoLabel] }));
