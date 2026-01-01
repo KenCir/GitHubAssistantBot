@@ -16,7 +16,7 @@ export default (app: Probot) => {
 
   app.on("issues.opened", async (context) => {
     if (!context.payload.issue.assignee) {
-      await context.octokit.issues.addLabels(
+      await context.octokit.rest.issues.addLabels(
         context.issue({ labels: [todoLabel] })
       );
     }
@@ -24,11 +24,11 @@ export default (app: Probot) => {
 
   app.on("issues.reopened", async (context) => {
     if (context.payload.issue.assignee) {
-      await context.octokit.issues.addLabels(
+      await context.octokit.rest.issues.addLabels(
         context.issue({ labels: [inProgressLabel] })
       );
     } else {
-      await context.octokit.issues.addLabels(
+      await context.octokit.rest.issues.addLabels(
         context.issue({ labels: [todoLabel] })
       );
     }
@@ -44,7 +44,7 @@ export default (app: Probot) => {
   app.on("issues.assigned", async (context) => {
     if (context.payload.issue.state === "closed") return;
 
-    await context.octokit.issues.addLabels(
+    await context.octokit.rest.issues.addLabels(
       context.issue({ labels: [inProgressLabel] })
     );
     await removeLabels(context, [todoLabel, blockedLabel]);
@@ -53,7 +53,7 @@ export default (app: Probot) => {
   app.on("issues.unassigned", async (context) => {
     if (context.payload.issue.state === "closed") return;
 
-    await context.octokit.issues.addLabels(
+    await context.octokit.rest.issues.addLabels(
       context.issue({ labels: [todoLabel] })
     );
     await removeLabels(context, [inProgressLabel]);
@@ -61,15 +61,15 @@ export default (app: Probot) => {
 
   app.on("issues.closed", async (context) => {
     if (context.payload.issue.state_reason === "not_planned") {
-      await context.octokit.issues.addLabels(
+      await context.octokit.rest.issues.addLabels(
         context.issue({ labels: [inactiveAbandonedLabel] })
       );
     } else if (context.payload.issue.state_reason === "duplicate") {
-      await context.octokit.issues.addLabels(
+      await context.octokit.rest.issues.addLabels(
         context.issue({ labels: [inactiveDuplicateLabel] })
       );
     } else {
-      await context.octokit.issues.addLabels(
+      await context.octokit.rest.issues.addLabels(
         context.issue({ labels: [completedLabel] })
       );
     }
