@@ -28,7 +28,7 @@
     "vitest": "^4.0.16"
   },
   "engines": {
-    "node": ">= 18"
+    "node": ">= 22"
   },
   "type": "module"
 }
