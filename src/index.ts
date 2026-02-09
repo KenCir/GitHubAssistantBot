@@ -1,81 +1,24 @@
 import { Probot } from "probot";
-import { removeLabels } from "./utils.js";
+import { loadEvents } from "./util/loaders.js";
 
-const todoLabel = "Status: Todo";
-const inProgressLabel = "Status: In Progress";
-const completedLabel = "Status: Completed";
-const blockedLabel = "Status: Blocked";
-const inactiveInvalidLabel = "Status: Inactive(Invalid)";
-const inactiveDuplicateLabel = "Status: Inactive(Duplicate)";
-const inactiveAbandonedLabel = "Status: Inactive(Abandoned)";
-
-export default (app: Probot) => {
+export default async (app: Probot) => {
   app.onError(async (error) => {
     app.log.error(error);
   });
 
-  app.on("issues.opened", async (context) => {
-    if (!context.payload.issue.assignee) {
-      await context.octokit.rest.issues.addLabels(
-        context.issue({ labels: [todoLabel] })
-      );
-    }
-  });
+  const events = await loadEvents(new URL("events/", import.meta.url));
 
-  app.on("issues.reopened", async (context) => {
-    if (context.payload.issue.assignee) {
-      await context.octokit.rest.issues.addLabels(
-        context.issue({ labels: [inProgressLabel] })
-      );
-    } else {
-      await context.octokit.rest.issues.addLabels(
-        context.issue({ labels: [todoLabel] })
-      );
-    }
+  for (const event of events) {
+    app.on(event.name, async (...args) => {
+      try {
+        await event.execute(...args);
+      } catch (error) {
+        app.log.error(error, `Error executing event ${String(event.name)}`);
+      }
+    });
 
-    await removeLabels(context, [
-      completedLabel,
-      inactiveInvalidLabel,
-      inactiveDuplicateLabel,
-      inactiveAbandonedLabel,
-    ]);
-  });
-
-  app.on("issues.assigned", async (context) => {
-    if (context.payload.issue.state === "closed") return;
-
-    await context.octokit.rest.issues.addLabels(
-      context.issue({ labels: [inProgressLabel] })
-    );
-    await removeLabels(context, [todoLabel, blockedLabel]);
-  });
-
-  app.on("issues.unassigned", async (context) => {
-    if (context.payload.issue.state === "closed") return;
-
-    await context.octokit.rest.issues.addLabels(
-      context.issue({ labels: [todoLabel] })
-    );
-    await removeLabels(context, [inProgressLabel]);
-  });
-
-  app.on("issues.closed", async (context) => {
-    if (context.payload.issue.state_reason === "not_planned") {
-      await context.octokit.rest.issues.addLabels(
-        context.issue({ labels: [inactiveAbandonedLabel] })
-      );
-    } else if (context.payload.issue.state_reason === "duplicate") {
-      await context.octokit.rest.issues.addLabels(
-        context.issue({ labels: [inactiveDuplicateLabel] })
-      );
-    } else {
-      await context.octokit.rest.issues.addLabels(
-        context.issue({ labels: [completedLabel] })
-      );
-    }
-
-    await removeLabels(context, [todoLabel, inProgressLabel, blockedLabel]);
-  });
+    app.log.info(`Registered event: ${String(event.name)}`);
+  }
 
   // For more information on building apps:
   // https://probot.github.io/docs/
