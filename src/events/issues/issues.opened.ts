@@ -1,11 +1,11 @@
-import { addLabel, TODO_LABEL } from "../../util/issueLabels.js";
-import { defineEvent } from "../index.js";
+import { addLabel, TODO_LABEL } from '../../util/issueLabels.js';
+import { defineEvent } from '../index.js';
 
 export default defineEvent({
-  name: "issues.opened",
-  async execute(context) {
-    if (!context.payload.issue.assignee) {
-      await addLabel(context, TODO_LABEL);
-    }
-  },
+	name: 'issues.opened',
+	async execute(context) {
+		if (!context.payload.issue.assignee) {
+			await addLabel(context, TODO_LABEL);
+		}
+	},
 });
