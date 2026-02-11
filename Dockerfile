@@ -1,15 +1,19 @@
-FROM node:24-slim AS builder
-WORKDIR /usr/src/app
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
-RUN npm ci
-COPY . .
-RUN npm run build
+FROM node:24-slim AS base
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+COPY . /app
+WORKDIR /app
 
-FROM node:24-slim
-WORKDIR /usr/src/app
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
-RUN npm ci --production
-RUN npm cache clean --force
-COPY --from=builder /usr/src/app/lib /usr/src/app/lib
-ENV NODE_ENV="production"
-CMD [ "npm", "start" ]
+FROM base AS prod-deps
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-lockfile
+
+FROM base AS build
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+RUN pnpm run build
+
+FROM base
+COPY --from=prod-deps /app/node_modules /app/node_modules
+COPY --from=build /app/lib /app/lib
+EXPOSE 8000
+CMD [ "pnpm", "start" ]
