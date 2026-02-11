@@ -19,15 +19,15 @@
   "dependencies": {
     "@octokit/webhooks": "^14.2.0",
     "ioredis": "^5.8.2",
-    "probot": "^14.2.4"
+    "probot": "^14.2.4",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@types/node": "^24.10.4",
     "nock": "^15.0.0",
     "smee-client": "^5.0.0",
     "typescript": "^5.9.3",
-    "vitest": "^4.0.16",
-    "zod": "^4.3.6"
+    "vitest": "^4.0.16"
   },
   "engines": {
     "node": ">= 22"
