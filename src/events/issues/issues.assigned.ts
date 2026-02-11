@@ -4,7 +4,7 @@ import {
   IN_PROGRESS_LABEL,
   removeLabels,
   TODO_LABEL,
-} from "../../util/labels.js";
+} from "../../util/issueLabels.js";
 import { defineEvent } from "../index.js";
 
 export default defineEvent({

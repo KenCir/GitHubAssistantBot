@@ -1,4 +1,4 @@
-import { addLabel, TODO_LABEL } from "../../util/labels.js";
+import { addLabel, TODO_LABEL } from "../../util/issueLabels.js";
 import { defineEvent } from "../index.js";
 
 export default defineEvent({
