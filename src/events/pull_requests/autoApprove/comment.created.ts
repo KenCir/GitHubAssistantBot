@@ -16,16 +16,18 @@ export default defineEvent({
 		});
 
 		const sha = pr.head.sha;
-		const checks = await context.octokit.rest.checks.listForRef({
+		const status = await context.octokit.rest.repos.getCombinedStatusForRef({
 			...context.repo(),
 			ref: sha,
 		});
-
-		const allPassed = checks.data.check_runs.every((check) => check.conclusion === 'success');
-		if (!allPassed) {
+		if (status.data.state !== 'success') {
+			const failedStatuses = status.data.statuses.filter((status) => status.state !== 'success');
+			const body = `すべてのCIチェックが成功している必要があります。\n現在成功していないチェック: 
+			${failedStatuses.map((status) => `- ${status.context}: ${status.state}${status.description ? ` (${status.description})` : ''}`).join('\n')}
+`;
 			await context.octokit.rest.issues.createComment({
 				...context.issue(),
-				body: 'すべてのCIチェックが成功している必要があります。チェック結果を確認してください。',
+				body,
 			});
 			return;
 		}
