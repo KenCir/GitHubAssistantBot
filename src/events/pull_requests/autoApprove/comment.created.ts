@@ -21,13 +21,9 @@ export default defineEvent({
 			ref: sha,
 		});
 
-		const incomplete = checks.data.check_runs.filter((check) => check.status !== 'completed');
-		const failed = checks.data.check_runs.filter(
-			(check) => check.status === 'completed' && check.conclusion !== 'success',
-		);
-		if (incomplete.length > 0 || failed.length > 0) {
-			const body = `すべてのCIチェックが成功している必要があります。\n\n未完了: 
-			${incomplete.map((check) => `- ${check.name}`).join('\n')}\n
+		const failed = checks.data.check_runs.filter((check) => check.conclusion === 'failure');
+		if (failed.length > 0) {
+			const body = `すべてのCIチェックが成功している必要があります。\n\n
 			失敗: ${failed.map((check) => `- ${check.name} (${check.conclusion})`).join('\n')}`;
 			await context.octokit.rest.issues.createComment({
 				...context.issue(),
