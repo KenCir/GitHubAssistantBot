@@ -50,7 +50,7 @@ importers:
         version: 15.0.0
       prettier:
         specifier: ^3.8.1
-        version: 3.8.1
+        version: 3.9.5
       smee-client:
         specifier: ^5.0.0
         version: 5.0.0
@@ -59,7 +59,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^4.0.16
-        version: 4.1.0(@opentelemetry/api@1.9.0)(@types/node@24.10.4)(vite@7.3.0(@types/node@24.10.4)(yaml@2.8.2))
+        version: 4.1.0(@opentelemetry/api@1.9.0)(@types/node@24.10.4)(vite@7.3.0(@types/node@24.10.4)(yaml@2.9.0))
 
 packages:
 
@@ -2656,6 +2656,7 @@ packages:
   nock@15.0.0:
     resolution: {integrity: sha512-EoAVk4Y8Yv4JUQz62sv8zmv+DoBblD/pht/q7aW/td1WietaFWrivzhMGGCLmx2qjpLcOrbyammedW8IRUU5TA==}
     engines: {node: '>=18.20.0 <20 || >=20.12.1'}
+    deprecated: v15.0.0 was released accidentally and is unstable. Please use v14.x until v15 is officially ready.
 
   node-releases@2.0.27:
     resolution: {integrity: sha512-nmh3lCkYZ3grZvqcCH+fjmQ7X+H0OeZgP40OierEaAptX4XofMh5kwNbWh7lBduUzCcV/8kZ+NDLCwm2iorIlA==}
@@ -2877,8 +2878,8 @@ packages:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
 
-  prettier@3.8.1:
-    resolution: {integrity: sha512-UOnG6LftzbdaHZcKoPFtOcCKztrQ57WkHDeRD9t/PTQtmT0NHSeWWepj6pS0z/N7+08BHFDQVUrfmfMRcZwbMg==}
+  prettier@3.9.5:
+    resolution: {integrity: sha512-/FVl766LpUfB5vXgCYOYa0MeV/441Ia99AeICQIQFTY/Nw0roZwULcXpku5i1/m5kt/baz+s4Zogspd839HSMg==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -4730,13 +4731,13 @@ snapshots:
       chai: 6.2.2
       tinyrainbow: 3.1.0
 
-  '@vitest/mocker@4.1.0(vite@7.3.0(@types/node@24.10.4)(yaml@2.8.2))':
+  '@vitest/mocker@4.1.0(vite@7.3.0(@types/node@24.10.4)(yaml@2.9.0))':
     dependencies:
       '@vitest/spy': 4.1.0
       estree-walker: 3.0.3
       magic-string: 0.30.21
     optionalDependencies:
-      vite: 7.3.0(@types/node@24.10.4)(yaml@2.8.2)
+      vite: 7.3.0(@types/node@24.10.4)(yaml@2.9.0)
 
   '@vitest/pretty-format@4.1.0':
     dependencies:
@@ -6962,7 +6963,7 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prettier@3.8.1: {}
+  prettier@3.9.5: {}
 
   probot@14.3.2:
     dependencies:
@@ -7743,7 +7744,7 @@ snapshots:
       '@types/unist': 3.0.3
       vfile-message: 4.0.3
 
-  vite@7.3.0(@types/node@24.10.4)(yaml@2.8.2):
+  vite@7.3.0(@types/node@24.10.4)(yaml@2.9.0):
     dependencies:
       esbuild: 0.27.7
       fdir: 6.5.0(picomatch@4.0.4)
@@ -7754,12 +7755,12 @@ snapshots:
     optionalDependencies:
       '@types/node': 24.10.4
       fsevents: 2.3.3
-      yaml: 2.8.2
+      yaml: 2.9.0
 
-  vitest@4.1.0(@opentelemetry/api@1.9.0)(@types/node@24.10.4)(vite@7.3.0(@types/node@24.10.4)(yaml@2.8.2)):
+  vitest@4.1.0(@opentelemetry/api@1.9.0)(@types/node@24.10.4)(vite@7.3.0(@types/node@24.10.4)(yaml@2.9.0)):
     dependencies:
       '@vitest/expect': 4.1.0
-      '@vitest/mocker': 4.1.0(vite@7.3.0(@types/node@24.10.4)(yaml@2.8.2))
+      '@vitest/mocker': 4.1.0(vite@7.3.0(@types/node@24.10.4)(yaml@2.9.0))
       '@vitest/pretty-format': 4.1.0
       '@vitest/runner': 4.1.0
       '@vitest/snapshot': 4.1.0
@@ -7776,7 +7777,7 @@ snapshots:
       tinyexec: 1.2.4
       tinyglobby: 0.2.17
       tinyrainbow: 3.1.0
-      vite: 7.3.0(@types/node@24.10.4)(yaml@2.8.2)
+      vite: 7.3.0(@types/node@24.10.4)(yaml@2.9.0)
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@opentelemetry/api': 1.9.0
