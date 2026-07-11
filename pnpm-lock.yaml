@@ -19,7 +19,7 @@ importers:
         version: 14.3.2
       zod:
         specifier: ^4.3.6
-        version: 4.3.6
+        version: 4.4.3
     devDependencies:
       '@sapphire/ts-config':
         specifier: ^5.0.3
@@ -59,7 +59,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^4.0.16
-        version: 4.1.0(@opentelemetry/api@1.9.0)(@types/node@24.10.4)(vite@7.3.0(@types/node@24.10.4)(yaml@2.8.2))
+        version: 4.1.0(@opentelemetry/api@1.9.0)(@types/node@24.10.4)(vite@7.3.0(@types/node@24.10.4)(yaml@2.9.0))
 
 packages:
 
@@ -2656,6 +2656,7 @@ packages:
   nock@15.0.0:
     resolution: {integrity: sha512-EoAVk4Y8Yv4JUQz62sv8zmv+DoBblD/pht/q7aW/td1WietaFWrivzhMGGCLmx2qjpLcOrbyammedW8IRUU5TA==}
     engines: {node: '>=18.20.0 <20 || >=20.12.1'}
+    deprecated: v15.0.0 was released accidentally and is unstable. Please use v14.x until v15 is officially ready.
 
   node-releases@2.0.27:
     resolution: {integrity: sha512-nmh3lCkYZ3grZvqcCH+fjmQ7X+H0OeZgP40OierEaAptX4XofMh5kwNbWh7lBduUzCcV/8kZ+NDLCwm2iorIlA==}
@@ -3673,8 +3674,8 @@ packages:
     peerDependencies:
       zod: ^3.25.0 || ^4.0.0
 
-  zod@4.3.6:
-    resolution: {integrity: sha512-rftlrkhHZOcjDwkGlnUtZZkvaPHCsDATp4pGpuOOMDaTdDDXF91wuVDJoWoPsKX/3YPQ5fHuF3STjcYyKr+Qhg==}
+  zod@4.4.3:
+    resolution: {integrity: sha512-ytENFjIJFl2UwYglde2jchW2Hwm4GJFLDiSXWdTrJQBIN9Fcyp7n4DhxJEiWNAJMV1/BqWfW/kkg71UDcHJyTQ==}
 
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
@@ -4730,13 +4731,13 @@ snapshots:
       chai: 6.2.2
       tinyrainbow: 3.1.0
 
-  '@vitest/mocker@4.1.0(vite@7.3.0(@types/node@24.10.4)(yaml@2.8.2))':
+  '@vitest/mocker@4.1.0(vite@7.3.0(@types/node@24.10.4)(yaml@2.9.0))':
     dependencies:
       '@vitest/spy': 4.1.0
       estree-walker: 3.0.3
       magic-string: 0.30.21
     optionalDependencies:
-      vite: 7.3.0(@types/node@24.10.4)(yaml@2.8.2)
+      vite: 7.3.0(@types/node@24.10.4)(yaml@2.9.0)
 
   '@vitest/pretty-format@4.1.0':
     dependencies:
@@ -5551,8 +5552,8 @@ snapshots:
       '@babel/parser': 7.29.0
       eslint: 9.39.2
       hermes-parser: 0.25.1
-      zod: 4.3.6
-      zod-validation-error: 4.0.2(zod@4.3.6)
+      zod: 4.4.3
+      zod-validation-error: 4.0.2(zod@4.4.3)
     transitivePeerDependencies:
       - supports-color
 
@@ -7743,7 +7744,7 @@ snapshots:
       '@types/unist': 3.0.3
       vfile-message: 4.0.3
 
-  vite@7.3.0(@types/node@24.10.4)(yaml@2.8.2):
+  vite@7.3.0(@types/node@24.10.4)(yaml@2.9.0):
     dependencies:
       esbuild: 0.27.7
       fdir: 6.5.0(picomatch@4.0.4)
@@ -7754,12 +7755,12 @@ snapshots:
     optionalDependencies:
       '@types/node': 24.10.4
       fsevents: 2.3.3
-      yaml: 2.8.2
+      yaml: 2.9.0
 
-  vitest@4.1.0(@opentelemetry/api@1.9.0)(@types/node@24.10.4)(vite@7.3.0(@types/node@24.10.4)(yaml@2.8.2)):
+  vitest@4.1.0(@opentelemetry/api@1.9.0)(@types/node@24.10.4)(vite@7.3.0(@types/node@24.10.4)(yaml@2.9.0)):
     dependencies:
       '@vitest/expect': 4.1.0
-      '@vitest/mocker': 4.1.0(vite@7.3.0(@types/node@24.10.4)(yaml@2.8.2))
+      '@vitest/mocker': 4.1.0(vite@7.3.0(@types/node@24.10.4)(yaml@2.9.0))
       '@vitest/pretty-format': 4.1.0
       '@vitest/runner': 4.1.0
       '@vitest/snapshot': 4.1.0
@@ -7776,7 +7777,7 @@ snapshots:
       tinyexec: 1.2.4
       tinyglobby: 0.2.17
       tinyrainbow: 3.1.0
-      vite: 7.3.0(@types/node@24.10.4)(yaml@2.8.2)
+      vite: 7.3.0(@types/node@24.10.4)(yaml@2.9.0)
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@opentelemetry/api': 1.9.0
@@ -7900,10 +7901,10 @@ snapshots:
 
   yoctocolors@2.1.2: {}
 
-  zod-validation-error@4.0.2(zod@4.3.6):
+  zod-validation-error@4.0.2(zod@4.4.3):
     dependencies:
-      zod: 4.3.6
+      zod: 4.4.3
 
-  zod@4.3.6: {}
+  zod@4.4.3: {}
 
   zwitch@2.0.4: {}
