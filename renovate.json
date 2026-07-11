@@ -1,8 +1,9 @@
 {
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
-	"extends": ["config:recommended"],
+	"extends": ["config:recommended", ":semanticCommits", ":semanticCommitTypeAll(chore)"],
 	"labels": ["Type: Dependencies"],
 	"prHourlyLimit": 5,
+	"minimumReleaseAge": "3 days",
 	"packageRules": [
 		{
 			"matchManagers": ["npm"],
